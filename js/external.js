@@ -16,14 +16,18 @@ var totalRentalCost = (() => {
     const pricePerDay = 3;
     var rentalData = {};
     var totalCost = 0;
+    var movies = ["Little Mermaid", "Brother Bear", "Hercules"];
+    var result = ''
 
     var rentMovie = (movieTitle, daysToRent) => {
         rentalData[movieTitle] = daysToRent;
     };
 
-    rentMovie("Little Mermaid", 3);
-    rentMovie("Brother Bear", 5);
-    rentMovie("Hercules", 1);
+    for (var title in movies) {
+        result = prompt("How long would you like to rent " +
+            movies[title] + "?");
+        rentMovie(movies[title], Number(result));
+    }
 
     for (var title in rentalData) {
         totalCost += (rentalData[title] * pricePerDay);
@@ -38,16 +42,20 @@ var totalWagesEarned = ( () => {
     var totalEarned = 0;
     var totalHoursWorked = 0;
     var hoursAndWages = {};
-    var company;
-
+    var companies = ["Google", "Amazon", "Facebook"];
+    var hours = 0, wage = 0;
     var workAt = (company, hours, wagePerHour) => {
         hoursAndWages[company] = {"hours": hours,
             "wages": wagePerHour};
     };
 
-    workAt("Google", 6, 400);
-    workAt("Amazon", 4, 380);
-    workAt("Facebook", 10, 350);
+    for (var company in companies) {
+        hours = prompt("How many hours did you work at " +
+            companies[company] + "?");
+        wage = prompt("What was your per hour wage at " +
+            companies[company] + "?");
+        workAt(companies[company], Number(hours), Number(wage));
+    }
 
     for (var key in hoursAndWages) {
         company = hoursAndWages[key];
@@ -58,13 +66,12 @@ var totalWagesEarned = ( () => {
         "wages": "$" + totalEarned.toFixed(2)};
 })();
 
-alert("You worked " + totalWagesEarned["hours"] + " hours and earned " + totalWagesEarned["wages"]);
+alert("You worked " + totalWagesEarned["hours"] +
+    " hours and earned " + totalWagesEarned["wages"]);
 
 var alertMessage = ( () => {
-    const maxHours = 16;
-    const maxClassSize = 25;
-    var currentHours = 0;
-    var currentClassSize = 20; //arbitrarily assigned
+    const maxHours = 16, maxClassSize = 25;
+    var currentHours = 0, currentClassSize = 20; //arbitrarily assigned
     var isSeatAvailable = currentClassSize < maxClassSize;
     var isScheduleOpen = currentHours < maxHours;
 
@@ -84,7 +91,7 @@ alert(alertMessage);
 
 alertMessage = ( () => {
     var isPremiumMember = confirm("Please click OK if you are a Premium Member:");
-    var isOfferValid = true //arbitrarily assigned
+    var isOfferValid = true; //arbitrarily assigned
     var itemsBought = '';
 
     do {
