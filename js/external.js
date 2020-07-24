@@ -17,7 +17,7 @@ var totalRentalCost = (() => {
     var rentalData = {};
     var totalCost = 0;
     var movies = ["Little Mermaid", "Brother Bear", "Hercules"];
-    var result = ''
+    var result = '';
 
     var rentMovie = (movieTitle, daysToRent) => {
         rentalData[movieTitle] = daysToRent;
@@ -73,13 +73,15 @@ var alertMessage = ( () => {
     const maxHours = 16, maxClassSize = 25;
     var currentHours = 0, currentClassSize = 20; //arbitrarily assigned
     var isSeatAvailable = currentClassSize < maxClassSize;
-    var isScheduleOpen = currentHours < maxHours;
+    var isScheduleOpen = false;
 
     do {
         currentHours = prompt("To see if you can enroll, " +
             "please enter how many hours you already have scheduled: " +
             "(max: 15)");
     } while (isNaN(currentHours) || currentHours === '');
+
+    isScheduleOpen = currentHours < maxHours;
 
     if (isSeatAvailable && isScheduleOpen)
         return "Congrats! You are able to enroll.";
