@@ -82,7 +82,7 @@
      */
     var userTotal = prompt("What is the total bill?");
     var userTipPercent = prompt("What percentage tip (.xx) would you like to leave?");
-    alert("Then you should tip " + calculateTip(userTipPercent, userTotal).toFixed(2));
+    alert("Then you should tip $" + calculateTip(userTipPercent, userTotal).toFixed(2));
 
     console.log("Total", userTotal,
         "Tip", calculateTip(userTipPercent, userTotal));
