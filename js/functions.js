@@ -81,10 +81,11 @@
      * then display the dollar amount they should tip
      */
     var userTotal = prompt("What is the total bill?");
-    var userTip = prompt("What percentage tip (.xx) would you like to leave?");
+    var userTipPercent = prompt("What percentage tip (.xx) would you like to leave?");
+    alert("Then you should tip " + calculateTip(userTipPercent, userTotal).toFixed(2));
 
     console.log("Total", userTotal,
-        "Tip", calculateTip(userTip, userTotal));
+        "Tip", calculateTip(userTipPercent, userTotal));
     /**
      * TODO:
      * Create a function named `applyDiscount`. This function should accept a price
@@ -99,7 +100,7 @@
      *
      * > applyDiscount(45.99, 0.12) // 40.4712
      */
-    var applyDiscount = (price, discount) => {
+    var applyDiscount = function (price, discount) {
         return price * (1 - discount);
     }
 
