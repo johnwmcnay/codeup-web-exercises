@@ -10,7 +10,7 @@
  */
 ( () => { //IIFE
     var sayHello = name => {
-        return "Hello, " + name;
+        return "Hello, " + name + "!";
     }
     /**
      * TODO:
@@ -67,8 +67,8 @@
      * > calculateTip(0.25, 25.50) // returns 6.375
      * > calculateTip(0.15, 33.42) // returns 5.013
      */
-    var calculateTip = (tip, total) => {
-        return tip * total;
+    var calculateTip = (tipPercent, total) => {
+        return tipPercent * total;
     };
     console.log(calculateTip(0.20, 20)); // returns 4
     console.log(calculateTip(0.25, 25.50)); // returns 6.375
@@ -82,7 +82,8 @@
      */
     var userTotal = prompt("What is the total bill?");
     var userTipPercent = prompt("What percentage tip (.xx) would you like to leave?");
-    alert("Then you should tip $" + calculateTip(userTipPercent, userTotal).toFixed(2));
+    alert("Then you should tip $" +
+        calculateTip(userTipPercent, userTotal).toFixed(2));
 
     console.log("Total", userTotal,
         "Tip", calculateTip(userTipPercent, userTotal));
@@ -100,7 +101,7 @@
      *
      * > applyDiscount(45.99, 0.12) // 40.4712
      */
-    var applyDiscount = function (price, discount) {
+    var applyDiscount = (price, discount) => {
         return price * (1 - discount);
     }
 
