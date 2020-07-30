@@ -23,3 +23,21 @@ const randomNumbersEvenOrOdd = num => {
 }
 
 randomNumbersEvenOrOdd(10);
+
+(() => {
+    var displayString;
+
+    for (var i = 1; i <10; i++) {
+        displayString = '';
+        for (var j = 1; j <= i; j++) {
+            displayString += i;
+        }
+        console.log(displayString);
+    }
+
+})();
+
+(() => {
+    for (var i = 100; i > 0; i -= 5)
+        console.log(i);
+})();
