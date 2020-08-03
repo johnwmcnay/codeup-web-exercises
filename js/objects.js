@@ -87,22 +87,6 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
-    // const createBook = (title, author) => {
-    //     var nameArray = author.split(" ");
-    //
-    //     var book = {
-    //         title: title,
-    //         author: {
-    //             firstName: nameArray[0],
-    //             lastName:  nameArray[1],
-    //         },
-    //         showBookInfo: function () {
-    //             console.log("Title: " + this.title);
-    //             console.log("Author: " + this.author.firstName + " " + this.author.lastName);
-    //         }
-    //     }
-    //     return book;
-    // }
 
     var books = {
         list: [],
@@ -122,7 +106,13 @@
                 }
             }
             this.list.push(book);
-        }
+        },
+        displayAll: function () {
+            this.list.forEach( (element, index) => {
+                console.log("Book #" + (index + 1));
+                element.showBookInfo();
+            });
+        },
     };
 
     books.addBook("It", "Stephen King");
@@ -158,11 +148,8 @@
      *      ...
      */
 
+    books.displayAll();
 
-    books.list.forEach( (book, index) => {
-        console.log("Book #" + (index + 1));
-        book.showBookInfo();
-    });
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
