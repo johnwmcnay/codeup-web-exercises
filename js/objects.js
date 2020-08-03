@@ -98,7 +98,7 @@
                 title: title,
                 author: {
                     firstName: nameArray[0],
-                    lastName:  nameArray[1],
+                    lastName:  nameArray.slice(1).join(" "),
                 },
                 showBookInfo: function () {
                     console.log("Title: " + this.title);
@@ -116,7 +116,7 @@
     };
 
     books.addBook("It", "Stephen King");
-    books.addBook("Walden", "Henry David-Thoreau");
+    books.addBook("Walden", "Henry David Thoreau");
     books.addBook("Green Eggs & Ham", "Dr. Seuss");
     books.addBook("Romeo & Juliet", "William Shakespeare");
     books.addBook("To Kill a Mockingbird", "Harper Lee");
