@@ -111,6 +111,7 @@
             this.list.forEach( (element, index) => {
                 console.log("Book #" + (index + 1));
                 element.showBookInfo();
+                console.log("---");
             });
         },
     };
