@@ -23,7 +23,7 @@
         },
 
         setRadius: function (radius) {
-            this.radius = radius
+            this.radius = radius;
         }
     };
 
