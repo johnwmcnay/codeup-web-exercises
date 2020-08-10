@@ -1,4 +1,86 @@
-.fancy-header {
-    color: purple;
+body {
+    background-color: cornsilk;
+    font-family: Arial, serif;
+    background-image: url(../img/bg-tile.png)
+}
+
+#top {
+    text-align: center;
+}
+
+header {
+    color: darkred;
     text-decoration: underline;
+}
+
+ul {
+    list-style: circle;
+    display: inline-block;
+    text-align: left;
+}
+
+
+ol {
+    list-style: lower-greek;
+    display: inline-block;
+    text-align: left;
+}
+
+li {
+    padding-bottom: 15px;
+}
+
+table {
+    align-self: center;
+    padding: 5px;
+    border: solid 1px black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    min-width: 100px;
+    text-align: center;
+    border: solid 1px black;
+}
+
+#features {
+    min-width: 200px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+a:link {
+    color:red;
+}
+
+/* visited link (:visited) */
+a:visited {
+    color:black;
+}
+
+/* mouse hover over link (:hover) */
+a:hover {
+    color:white;
+}
+
+/* active/selected link (:active) */
+a:active {
+    color:deeppink;
+}
+
+.pic {
+    display: block;
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    text-align: center;
 }
