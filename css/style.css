@@ -42,6 +42,7 @@ table {
 th {
     min-width: 100px;
     text-align: center;
+    font-size: 1.25em;
     border: solid 1px black;
 }
 
@@ -50,7 +51,6 @@ th {
 }
 
 td {
-    padding: 10px;
     text-align: center;
 }
 
@@ -83,4 +83,8 @@ a:active {
 
 .title {
     text-align: center;
+}
+
+footer {
+    padding-top: 15px;
 }
