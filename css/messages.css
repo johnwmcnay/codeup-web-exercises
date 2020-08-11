@@ -1,3 +1,20 @@
+:root {
+    --bg-info: #a5e5f6;
+    --text-info: #43288c;
+    --bg-success: #a9ffa9;
+    --text-success: #215f21;
+    --bg-warning: lightyellow;
+    --text-warning: #9b954b;
+    --bg-error: lightpink;
+    --text-error: #990726;
+    --message-border: 1px solid lightgray;
+    --message-font-weight: 500;
+    --message-border-radius: 5px;
+    --message-padding: 10px;
+    --message-margin: 8px auto;
+    --message-max-width: 600px;
+}
+
 body, html {
     height: 100%;
     width: 100%;
@@ -7,30 +24,30 @@ body, html {
 }
 
 .message {
-    margin: 8px auto;
-    max-width: 600px;
-    padding: 10px;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    font-weight: 500;
+    margin: var(--message-margin);
+    max-width: var(--message-max-width);
+    padding: var(--message-padding);
+    border: var(--message-border);
+    border-radius: var(--message-border-radius);
+    font-weight: var(--message-font-weight);
 }
 
 .message-info {
-    background-color: #a5e5f6;
-    color: #43288c;
+    background-color: var(--bg-info);
+    color: var(--text-info);
 }
 
 .message-success {
-    background-color: #a9ffa9;
-    color: #215f21;
+    background-color: var(--bg-success);
+    color: var(--text-success);
 }
 
 .message-warning {
-    background-color: lightyellow;
-    color: #9b954b;
+    background-color: var(--bg-warning);
+    color: var(--text-warning);
 }
 
 .message-error {
-    background-color: lightpink;
-    color: #990726;
+    background-color: var(--bg-error);
+    color: var(--text-error);
 }
