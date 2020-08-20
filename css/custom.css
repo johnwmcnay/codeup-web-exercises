@@ -81,3 +81,9 @@
     padding: 10px;
     width: 100%;
 }
+
+.card-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
