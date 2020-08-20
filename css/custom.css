@@ -87,3 +87,14 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.nav-tabs a {
+    color: #626262;
+}
+
+.nav-tabs a:hover {
+    color: #373737;
+}
+.nav-tabs a:hover .badge-pill {
+    background-color: #3B94D9;
+}

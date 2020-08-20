@@ -124,7 +124,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Next Step ></a>
+                    <a onclick="showTab('#crust-tab', '#cheese-tab')" href="#toppings-tab" class="btn btn-primary">&lt; Previous Step</a>
+                    <a onclick="showTab('#toppings-tab', '#cheese-tab')" href="#toppings-tab" class="btn btn-primary">Next Step ></a>
                 </div>
             </div>
         </div>
@@ -167,7 +168,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#cheeseSelect" class="btn btn-primary">Next Step ></a>
+                    <a onclick="showTab('#cheese-tab', '#crust-tab')" href="#cheese-tab" class="btn btn-primary">Next Step ></a>
                 </div>
 
             </div>
@@ -227,7 +228,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#cheeseSelect" class="btn btn-primary">Next Step ></a>
+                    <a onclick="showTab('#cheese-tab', '#toppings-tab')" href="#toppings-tab" class="btn btn-primary">&lt; Previous Step</a>
+                    <a href="#cheeseSelect" class="btn btn-primary">Checkout <i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
@@ -245,6 +247,10 @@
         crossorigin="anonymous"></script>
 <!-- Your custom JS goes here -->
 <script>
+function showTab(tab, oldTab) {
+    $(oldTab).tab('dispose');
+    $(tab).tab('show');
+}
 
 </script>
 </body>
