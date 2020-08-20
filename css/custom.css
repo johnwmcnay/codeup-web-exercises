@@ -1,0 +1,30 @@
+#signup {
+    color: #626262;
+}
+
+#signup:hover {
+    color: #ababab;
+}
+
+#zipCodeSearch {
+    color: #626262;
+    border-color: #373737;
+}
+
+#zipCodeSearch:hover {
+    background-color: #ababab;
+}
+
+.jumbotron {
+    background-image: url("../img/pizza.png");
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.jumbotron h1 {
+    background-color: #DDDDDD;
+    opacity: 60%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
