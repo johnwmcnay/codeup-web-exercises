@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>DOM: Query and Modify</title>
+    <style>
+        button {
+            margin-left: 10px;
+            background-color: #ababab;
+            color: #43288c;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #626262;
+            color:floralwhite;
+        }
+    </style>
 </head>
 <body>
 
@@ -28,41 +42,72 @@
 <script>
     (function() {
         "use strict";
+
         // TODO: Uncomment next line and get the main header element by id
-        var mainHeader = document.getElementById("main-header");
+        let mainHeader = document.getElementById("main-header");
 
         // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool";
+        let btn = document.createElement("button");
+        btn.innerText = "Click me to change the header!"
+        btn.onclick = function() {
+            mainHeader.innerHTML = "JavaScript is Cool";
+            btn3.hidden = false;
+        }
+        mainHeader.appendChild(btn);
 
         // TODO: Uncomment the next line and get the sub header element by id
-        var subHeader = document.getElementById("sub-header");
+        let subHeader = document.getElementById("sub-header");
 
-        // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = "blue";
+        let btn2 = document.createElement("button");
+        btn2.innerText = "Click me to change this header!"
+        btn2.hidden = true;
+        btn2.onclick = function() {
+            // TODO: Set the text color of subHeader to blue
+            subHeader.style.color = "blue";
+            btn4.hidden = false;
+            this.hidden = true;
+        }
+        subHeader.appendChild(btn2);
+
+
+
 
         // TODO: Uncomment the next line and get all list items
-        var listItems = document.getElementsByTagName("li");
+        let listItems = document.getElementsByTagName("li");
 
-        console.log(listItems);
+        let btn3 = document.createElement("button");
+        btn3.innerText = "Click me to change the list items!";
+        btn3.hidden = true;
+        btn3.onclick = function() {
 
-        // TODO: Set text color on every other list item to grey
-        // TODO: Set text color of li with dbid = 1 to blue
-        for (let i = 0; i < listItems.length; i++) {
+            for (let i = 0; i < listItems.length; i++) {
 
-            let item = listItems[i];
+                let item = listItems[i];
 
-            if (item.getAttribute("data-dbid") === "1") {
-                item.style.color = "blue";
-            } else if (i % 2 === 0) {
-                item.style.color = "grey";
+                if (item.getAttribute("data-dbid") === "1") {
+                    item.style.color = "blue";
+                } else if (i % 2 === 0) {
+                    item.style.color = "grey";
+                }
             }
+            btn2.hidden = false;
+            this.hidden = true;
         }
+        listItems[0].appendChild(btn3);
 
         // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-        var subParagraphs = document.getElementsByClassName("sub-paragraph");
+        let subParagraphs = document.getElementsByClassName("sub-paragraph");
 
-        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerText = "Mission Accomplished!"
+        let btn4 = document.createElement("button");
+        btn4.innerText = "Click me to accomplish the mission!"
+        btn4.hidden = true;
+        btn4.onclick = function() {
+            // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+            subParagraphs[0].innerText = "Mission Accomplished!"
+            this.hidden = true;
+        }
+        subParagraphs[0].appendChild(btn4);
+
     })();
 </script>
 </body>
