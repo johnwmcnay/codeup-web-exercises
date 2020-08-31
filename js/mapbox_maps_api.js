@@ -67,11 +67,12 @@ let restaurants = {
                 })
                 .then(function(end) {
 
-                    let popup = new mapboxgl.Popup({anchor: "top",})
+                    let popup = new mapboxgl.Popup()
                         .setLngLat([obj.lng, obj.lat])
                         .setHTML(function(){
 
-                            let HTML = obj.name + "<br><br>" + "Favorites:" + "<br><ul>";
+                            let HTML = "<span style='font-size: 20px'><strong>" + obj.name + "</span></strong>" +
+                                "<br><br><span style='font-size: 16px'>Favorites:</span><br><ul>";
 
                             for (let fav of obj.favorites) {
                                 HTML += "<li>" + fav + "</li>";
