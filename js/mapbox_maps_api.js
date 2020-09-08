@@ -4,7 +4,7 @@ mapboxgl.accessToken = mapboxToken;
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-    center: [-96.8084, 32.7799], // starting position [lng, lat]
+    center: [-96.8084, 27.7799], // starting position [lng, lat]
     zoom: 6,  // starting zoom
 });
 
@@ -37,6 +37,14 @@ let restaurants = {
                 "Fettuccine Alfredo",
             ]
         },
+        {
+            searchStr: "Yama Sushi, Dallas, TX",
+            name: "Yama Sushi",
+            favorites: [
+                "Chicken Katsu",
+            ]
+        }
+
     ],
     "getCoordinatesAndUpdate": function() {
 
@@ -45,7 +53,6 @@ let restaurants = {
         let count = 0;
 
         self.coordinates = [];
-
         self.sumLng = 0;
         self.sumLat = 0;
 
