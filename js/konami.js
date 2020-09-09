@@ -26,9 +26,7 @@ $(document).keyup(function(event){
 
     if (match) {
 
-        $("body")
-            .css("background-color", "gray")
-            .animate({opacity: '1'});
+        $("#hidden-div").fadeIn()
 
         console.log("code entered!");
     }
