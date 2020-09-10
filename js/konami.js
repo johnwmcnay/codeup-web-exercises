@@ -48,9 +48,10 @@ $(document).keyup(function(event){
             $("#spotlight").animate({opacity: "0"});
             clearInterval(spotlightID);
             intervalID = undefined;
-            $("html").animate({backgroundColor: "lightgray"});
+            $("html").animate({backgroundColor: "#D3D3D3"});
             for (let element of $("#konami").children()) {
-                $(element).css("color", "black");
+                element.style = "";
+                $(element).removeClass("secret-input");
             }
         }
     }
