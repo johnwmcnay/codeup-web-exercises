@@ -1,34 +1,57 @@
 "use strict";
 
 const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13];
-let inputs = [];
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+let sequencePosition = 0;
+let intervalID;
+let spotlightID;
 
 $(document).keyup(function(event){
 
-    if (inputs.length === 11) {
-        inputs.shift();
-    }
+    if (event.keyCode === konamiCode[sequencePosition]) {
+        let elements = $("#konami").children();
+        $(elements[sequencePosition]).addClass("secret-input");
+        sequencePosition++;
+    } else {
 
-    inputs.push(event.keyCode);
-
-    let match = function() {
-
-        if (inputs.length < 11) {
-            return false;
+        for (let element of $("#konami").children()) {
+            $(element).removeClass("secret-input");
+            sequencePosition = 0;
         }
-        for (let index in inputs) {
-           if (inputs[index] !== konamiCode[index]) {
-               return false;
-           }
-        };
-        return true;
-    }();
-
-    if (match) {
-
-        $("#hidden-div").fadeIn()
-
-        console.log("code entered!");
     }
 
+    if (sequencePosition === 11) {
+        sequencePosition = 0;
+
+        if (intervalID === undefined) {
+            intervalID = setInterval(function(){
+                for (let element of $("#konami").children()) {
+                    let randomNumber = Math.floor(Math.random() * 7);
+                    $(element).css("color", colors[randomNumber]);
+                }
+
+            }, 100);
+            $("html").animate({backgroundColor: "#757575"});
+
+            spotlightID = setInterval(function() {
+                let randomX = Math.floor(Math.random() * 80 + 10);
+                let randomY = Math.floor(Math.random() * 80 + 10);
+                $("#spotlight").animate({
+                    left: randomX.toString() + "%",
+                    top: randomY.toString() + "%",
+                    opacity: '0.5',
+                }, 1200, "swing");
+            }, 1200);
+
+        } else {
+            clearInterval(intervalID);
+            $("#spotlight").animate({opacity: "0"});
+            clearInterval(spotlightID);
+            intervalID = undefined;
+            $("html").animate({backgroundColor: "lightgray"});
+            for (let element of $("#konami").children()) {
+                $(element).css("color", "black");
+            }
+        }
+    }
 });
