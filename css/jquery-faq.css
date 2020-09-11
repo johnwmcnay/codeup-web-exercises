@@ -69,8 +69,8 @@ img {
 
 .frame {
     border: 5px solid brown;
-    height: 200px;
-    width: 300px;
+    height: fit-content;
+    width: fit-content;
 
 }
 
