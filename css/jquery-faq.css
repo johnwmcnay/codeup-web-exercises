@@ -56,3 +56,32 @@ a:active {
 .li-text {
     color: blue;
 }
+
+img {
+    max-height: 200px;
+}
+
+.frame {
+    border: 5px solid brown;
+}
+
+div {
+    width: fit-content;
+}
+
+#gallery {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+button {
+    width: fit-content;
+    margin: 5px;
+}
+
+#gallery>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
