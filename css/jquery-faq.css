@@ -1,0 +1,18 @@
+.invisible {
+    display: none;
+}
+
+.highlighted {
+    background-color: #9b954b;
+}
+
+#main-title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+dt {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
