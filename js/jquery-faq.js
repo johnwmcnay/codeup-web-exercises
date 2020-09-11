@@ -25,7 +25,7 @@ $("#highlight-last").click(function() {
 });
 
 $("h3").click(function() {
-   $(this).next().toggleClass("bold-header");
+   $(this).next().slideToggle().toggleClass("bold-header");
 });
 
 $("li").click(function() {
@@ -65,3 +65,11 @@ $("#right-swap").click(function() {
     $(this).prev().children("img").attr("src", originalCenter);
     $("#center-swap").prev().children("img").attr("src", originalRight);
 });
+
+$(".close").click(function() {
+    $(this).parent().hide();
+});
+
+setTimeout(function() {
+    $("#myModal").modal('show');
+}, 8000)

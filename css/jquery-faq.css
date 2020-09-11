@@ -49,6 +49,10 @@ a:active {
     width: fit-content;
 }
 
+ul {
+    display: none;
+}
+
 .bold-header {
     font-weight: bold;
 }
@@ -89,4 +93,20 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+h1>span {
+    color: #960000;
+}
+
+#delayed-msg {
+    position: fixed;
+    display: none;
+    top: 10%;
+    right: 5%;
+}
+
+button.close {
+    display: inline;
+    margin: 0;
 }
