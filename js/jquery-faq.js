@@ -1,7 +1,19 @@
 $("#toggle").click(function(){
-    $("dd").toggleClass("invisible");
+    $("dd").removeClass("invisible");
+    $("dt").removeClass("highlighted");
+});
+
+$("#collapse").click(function() {
+    $("dd").addClass("invisible");
+    $("dt").removeClass("highlighted");
 });
 
 $('dt').click(function() {
-    $(this).toggleClass("highlighted");
-})
+    $(this).next().toggleClass("invisible");
+    let isHidden = $(this).next().hasClass("invisible");
+    if (isHidden) {
+        $(this).removeClass("highlighted");
+    } else {
+        $(this).addClass("highlighted");
+    }
+});

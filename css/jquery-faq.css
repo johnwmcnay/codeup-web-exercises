@@ -1,3 +1,7 @@
+body {
+    background-color: #67833a;
+}
+
 .invisible {
     display: none;
 }
@@ -11,8 +15,27 @@
     font-size: 30px;
 }
 
+dd {
+    color: lightgrey;
+}
+
 dt {
     margin-bottom: 15px;
     font-weight: bold;
     font-size: 20px;
+    width: fit-content;
+}
+
+dl {
+    margin-left: 30px;
+}
+
+a {
+    text-decoration: none;
+    margin-right: 25px;
+    color: #144014;
+}
+
+a:active {
+    color: #9b954b;
 }
