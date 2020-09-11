@@ -36,6 +36,23 @@ a {
     color: #144014;
 }
 
+li {
+    width: fit-content;
+}
+
 a:active {
     color: #9b954b;
+}
+
+.li-highlight {
+    background-color: yellow;
+    width: fit-content;
+}
+
+.bold-header {
+    font-weight: bold;
+}
+
+.li-text {
+    color: blue;
 }

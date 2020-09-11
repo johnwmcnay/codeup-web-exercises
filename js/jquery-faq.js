@@ -17,3 +17,17 @@ $('dt').click(function() {
         $(this).addClass("highlighted");
     }
 });
+
+$("#highlight-last").click(function() {
+    $("ul").each(function() {
+        $(this).children().last().toggleClass("li-highlight");
+    });
+});
+
+$("h3").click(function() {
+   $(this).next().toggleClass("bold-header");
+});
+
+$("li").click(function() {
+    $(this).parent().children().first().toggleClass("li-text")
+})
