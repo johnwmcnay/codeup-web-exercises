@@ -58,15 +58,20 @@ a:active {
 }
 
 img {
-    max-height: 200px;
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
 }
 
 .frame {
     border: 5px solid brown;
+    height: 200px;
+    width: 300px;
+
 }
 
 div {
-    width: fit-content;
+    /*width: fit-content;*/
 }
 
 #gallery {

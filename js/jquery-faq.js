@@ -41,10 +41,6 @@ $("#left-swap").click(function() {
 
 });
 
-// The left frame swaps to the right and takes the image from the frame in the center.
-//     The center frame swaps randomly to either the left or right.
-//     The right frame swaps to the left and takes the image from the frame in the center.
-
 $("#center-swap").click(function() {
     let originalCenter = $(this).prev().children("img").attr("src");
     let originalLeft = $("#left-swap").prev().children("img").attr("src");
