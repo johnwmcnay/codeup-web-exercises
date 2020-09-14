@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+</head>
+<body>
+
+<h1>My Tool Store</h1>
+
+<table id="products">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tbody id="insertProducts"></tbody>
+</table>
+<button id="update">Update</button>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script>
+(function() {
+    "use strict";
+    // TODO: Create an AJAX GET request for the file under data/inventory.json
+    $.get("data/inventory.json")
+        .done(function(data){
+
+            for (let obj of data) {
+
+                addToTable(obj);
+                // let row = document.createElement("tr");
+                // for (let property of properties) {
+                //     let tableData = document.createElement("td");
+                //     $(tableData).text(
+                //         (property === "categories") ? obj[property].join(", "): obj[property]
+                //     );
+                //     $(tableData).addClass(property);
+                //     row.append(tableData);
+                // }
+                // table.append(row);
+            }
+
+        });
+    $(function() {
+        $("#update").click(updateTable);
+    });
+
+    function addToTable(obj) {
+        const properties = ["title", "quantity", "price", "categories"];
+        let table = $("#insertProducts");
+        let row = document.createElement("tr");
+
+        for (let property of properties) {
+            let tableData = document.createElement("td");
+            $(tableData).text(
+                (property === "categories") ? obj[property].join(", "): obj[property]
+            );
+            $(tableData).addClass(property);
+            row.append(tableData);
+        }
+        table.append(row);
+    }
+
+    function updateTable() {
+        $.get("data/inventory.json")
+            .done(function(data) {
+                let titles = [];
+
+                for (let element of $(".title")) {
+                    titles.push(element.innerText);
+                }
+
+                for (let obj of data) {
+                    if (titles.indexOf(obj.title) === -1) {
+                        addToTable(obj);
+                    }
+                }
+            });
+    }
+
+    // TODO: Take the data from inventory.json and append it to the products table
+    //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+    //             its contents and fields
+    //       HINT: You will want to target #insertProducts for your new HTML elements
+})();
+</script>
+
+</body>
+</html>
