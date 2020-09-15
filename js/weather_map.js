@@ -1,7 +1,7 @@
 (function () {
 
     mapboxgl.accessToken = mapboxToken;
-    let map;
+    let map, marker;
 
     function getWeatherData(lng, lat) {
 
@@ -71,21 +71,39 @@
         let location = $("#cityInput").val().trim();
         console.log(location);
         if (location !== "") {
-            getWeatherData(location);
+            searchFor(location);
         }
     });
 
-    geocode("Dallas, TX", mapboxToken)
-        .then(function(result) {
-            getWeatherData(result[0], result[1]);
-            return result;
-        }).then(function(data){
-            map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-                center: data, // starting position [lng, lat]
-                zoom: 10,  // starting zoom
-            });
+    function searchFor(searchStr) {
+
+        geocode(searchStr, mapboxToken)
+            .then(function (result) {
+                getWeatherData(result[0], result[1]);
+                return result;
+            }).then(function (data) {
+                map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+                    center: data, // starting position [lng, lat]
+                    zoom: 10,  // starting zoom
+                });
+
+                marker = new mapboxgl.Marker({
+                    draggable: true})
+                    .setLngLat(data)
+                    .addTo(map);
+
+                function onDragEnd() {
+                    let lngLat = marker.getLngLat();
+
+                    getWeatherData(lngLat.lng, lngLat.lat);
+                }
+
+                marker.on('dragend', onDragEnd);
         });
+    }
+
+    searchFor("Dallas, TX");
 
 }());
