@@ -7,55 +7,56 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Weather</title>
-    <style>
-        .day {
-            width: 18%;
-        }
-
-        #main-header {
-            background-color: dodgerblue;
-            color: floralwhite;
-        }
-    </style>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="css/weather.css">
 </head>
 <body>
 
 <div id="main-header" class="row container-fluid">
     <div>Weather APP</div>
-    <div>Current city: </div>
+    <div id="city">Current city:</div>
 </div>
 
-<div class="row container-fluid" id="forecast">
+<form>
+    <label for="cityInput">Location: </label>
+    <input type="text" placeholder="Enter location here" id="cityInput" name="cityInput">
+    <input class="btn btn-primary" type="submit" id="citySubmit" name="cityInput" value="Search">
+</form>
 
-    <div class="day card">
-        <div class="date card-header text-center">
-            09-15-2020
-        </div>
+<div class="row container-fluid" id="forecast"></div>
 
-        <div class="card-body">
-            <div class="temperature text-center">
-                75/75
-            </div>
-            <hr>
-            <div>
-                Description:
-            </div>
-            <hr>
-            <div>
-                Humidity:
-            </div>
-            <hr>
-            <div>
-                Wind:
-            </div>
-            <hr>
-            <div>
-                Pressure:
-            </div>
-        </div>
+<div id='map' style='width: 90%; height: 400px;'></div>
+
+<div class="day card d-none" id="template">
+    <div class="date card-header text-center">
+        09-15-2020
     </div>
 
+    <div class="card-body">
+        <div class="temperature text-center">
+            75/75
+        </div>
+        <div class="icon row justify-content-center"></div>
+        <hr>
+        <div class="description">
+            Description:
+        </div>
+        <hr>
+        <div class="humidity">
+            Humidity:
+        </div>
+        <hr>
+        <div class="wind">
+            Wind:
+        </div>
+        <hr>
+        <div class="pressure">
+            Pressure:
+        </div>
+    </div>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -71,6 +72,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 <script src="js/keys.js"></script>
+<script src="js/mapbox-geocoders-utils.js"></script>
 <script src="js/weather_map.js"></script>
 </body>
 </html>
