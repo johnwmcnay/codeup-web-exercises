@@ -16,7 +16,6 @@
             lat: lat,
             units: "imperial"
         }).done(function (data) {
-            console.log(data);
             let fiveDayForecast = [];
             for (let i = 0; i < data.list.length; i += 8) {
                 fiveDayForecast.push(data.list[i]);
@@ -33,7 +32,7 @@
 
             let days = $("#forecast>.day");
 
-            let fadeAllIn = function test(index) {
+            let fadeAllIn = function(index) {
                 $(days[index]).fadeIn(400, function() {
                     if (index + 1 < days.length) {
                         fadeAllIn(index + 1);
@@ -61,7 +60,14 @@
             .html($("#template").html());
 
         $(card).find(".temperature").text(minTemp + " °F / " + maxTemp + " °F");
-        $(card).find(".date").text(date);
+        $(card).find(".date").text(function(str) {
+            let d = new Date();
+            d.setFullYear(parseInt(str.substring(0,4)));
+            d.setMonth(parseInt(str.substring(5,7)) - 1);
+            d.setDate(parseInt(str.substring(8,10)));
+
+            return d.toDateString();
+        }(date));
         $(card).find(".icon").html(
             "<img src='http://openweathermap.org/img/w/" + icon + ".png'>"
         )
@@ -88,6 +94,7 @@
         let location = $("#cityInput").val().trim();
         if (location !== "") {
             searchFor(location);
+            $("#cityInput").val("");
         }
     });
 
@@ -97,6 +104,7 @@
             let location = $("#cityInput").val().trim();
             if (location !== "") {
                 searchFor(location);
+                $("#cityInput").val("");
             }
         }
     });

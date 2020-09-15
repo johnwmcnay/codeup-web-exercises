@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Grandstander:wght@300&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Weather</title>
@@ -13,29 +15,31 @@
 </head>
 <body>
 
-<div id="main-header" class="row container-fluid align-items-center justify-content-between">
-    <div id="brand">Weather APP</div>
-    <div id="city">Current city:</div>
+<div id="main-header" class="row container-fluid align-items-center">
+    <div id="brand" class="col-3">Weather App</div>
+    <div id="searchForm" class="col-6">
+        <form class="form-inline form-row justify-content-center">
+            <label for="cityInput"></label>
+            <input class="form-control col-5" type="text" placeholder="Enter location here" id="cityInput"
+                   name="cityInput">
+            <a class="btn col-auto" role="button" id="citySubmit">Search</a>
+        </form>
+    </div>
+    <div id="city" class="col-3 p-0 row justify-content-end">Current city:</div>
 </div>
-
-<div id="searchForm" class="m-3">
-    <form class="form-inline form-row w-50">
-        <label for="cityInput" class="col-auto mr-2">Location: </label>
-        <input class="form-control col-5 mr-2" type="text" placeholder="Enter location here" id="cityInput"
-               name="cityInput">
-        <a class="btn col-auto mr-2" role="button" id="citySubmit">Search</a>
-    </form>
-</div>
+<div style="height: 100px; width: 1px" class="d-inline-block m-0 p-0"></div>
 
 <div class="row justify-content-center container-fluid m-0 p-0">
     <div class="row container-fluid m-0 p-0 justify-content-center" id="forecast"></div>
 </div>
 
-<div id="mapBox" class="row justify-content-center mt-2 container-fluid">
-    <div id='map' class="rounded"></div>
+<div id="mapBox" class="row justify-content-center m-0 p-0 container-fluid">
+    <div id='map' class="rounded mt-3"></div>
 </div>
 
-
+<footer class="m-0 p-0 row container-fluid">
+    <span class="m-2">Powered by OpenWeather and MapBox API</span>
+</footer>
 <div class="day card d-none" id="template">
     <div class="date card-header text-center">
         09-15-2020
