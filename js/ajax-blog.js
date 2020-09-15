@@ -11,14 +11,14 @@ $(function() {
         let template = $("#template");
 
         $(element).html($(template).html());
-        $(element).addClass("post container w-50 mb-3");
+        $(element).addClass("post container w-75 mb-3 invisible");
         $(element).find(".date").html(obj.date);
         $(element).find(".categories").html(
             "tags:&nbsp;<span class='tags'>" + obj.categories.join(" ") + "</span>")
         $(element).find(".content").html(obj.content);
         $(element).find(".main-title").html(obj.title);
 
-        $("#posts").prepend(element);
+        $("#posts").prepend($(element).removeClass("invisible").hide().fadeIn());
     }
 
     setInterval(function(){
