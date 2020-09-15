@@ -1,12 +1,60 @@
 body, html {
     /*background-color: lightcyan;*/
+    margin: 0;
+    padding: 0;
 }
 
 .day {
-    width: 20%;
+    width: 18%;
+}
+
+.date {
+    font-size: 12px;
+    padding: 4px 0;
+}
+
+#brand {
+    font-size: 24px;
+}
+
+#citySubmit{
+    background-color: dodgerblue;
+    color: floralwhite;
+}
+
+#citySubmit:hover {
+    background-color: #0067c3;
+}
+
+#citySubmit:active {
+    background-color: #032e58;
+    color: gray;
 }
 
 #main-header {
     background-color: dodgerblue;
     color: floralwhite;
+    height: 60px;
+    margin: 0;
+}
+
+.description {
+    font-size: 12px;
+}
+
+.humidity, .pressure, .wind {
+    font-size: 14px;
+}
+
+hr {
+    margin: 8px 0;
+}
+
+.card-body {
+    padding: 10px
+}
+
+#map {
+    width: 90%;
+    height: 25vw;
 }

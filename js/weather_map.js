@@ -1,7 +1,12 @@
 (function () {
 
     mapboxgl.accessToken = mapboxToken;
-    let map, marker;
+    let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-96.8084, 27.7799], // starting position [lng, lat]
+        zoom: 3,  // starting zoom
+    });
 
     function getWeatherData(lng, lat) {
 
@@ -25,6 +30,19 @@
             for (let day of fiveDayForecast) {
                 createDayCard(day);
             }
+
+            let days = $("#forecast>.day");
+
+            let fadeAllIn = function test(index) {
+                $(days[index]).fadeIn(400, function() {
+                    if (index + 1 < days.length) {
+                        fadeAllIn(index + 1);
+                    }
+                });
+            }
+
+            fadeAllIn(0);
+
         });
     }
 
@@ -38,7 +56,8 @@
         let wind = day.wind.speed;
         let pressure = day.main.pressure;
         let card = document.createElement("div");
-        $(card).addClass("day card")
+
+        $(card).addClass("day card mr-1 ml-1")
             .html($("#template").html());
 
         $(card).find(".temperature").text(minTemp + " °F / " + maxTemp + " °F");
@@ -47,31 +66,38 @@
             "<img src='http://openweathermap.org/img/w/" + icon + ".png'>"
         )
 
-        $(card).find(".description").html(
-            "<strong>Description: </strong>" + description
-        )
+        $(card).find(".description").html(description);
 
         $(card).find(".humidity").html(
             "<strong>Humidity: </strong>" + humidity + "%"
         )
 
         $(card).find(".wind").html(
-            "<strong>Wind: </strong>" + wind + "mph"
+            "<strong>Wind: </strong>" + wind + " mph"
         )
 
         $(card).find(".pressure").html(
             "<strong>Pressure: </strong>" + pressure
         )
 
-        $("#forecast").append(card);
+        $("#forecast").append($(card).hide());
     }
 
     $("#citySubmit").click(function (e) {
         e.preventDefault();
         let location = $("#cityInput").val().trim();
-        console.log(location);
         if (location !== "") {
             searchFor(location);
+        }
+    });
+
+    $("#cityInput").on("keypress", function(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            let location = $("#cityInput").val().trim();
+            if (location !== "") {
+                searchFor(location);
+            }
         }
     });
 
@@ -82,14 +108,9 @@
                 getWeatherData(result[0], result[1]);
                 return result;
             }).then(function (data) {
-                map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-                    center: data, // starting position [lng, lat]
-                    zoom: 10,  // starting zoom
-                });
+                map.flyTo({center: data, zoom: 12});
 
-                marker = new mapboxgl.Marker({
+                let marker = new mapboxgl.Marker({
                     draggable: true})
                     .setLngLat(data)
                     .addTo(map);
@@ -98,6 +119,7 @@
                     let lngLat = marker.getLngLat();
 
                     getWeatherData(lngLat.lng, lngLat.lat);
+                    map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
                 }
 
                 marker.on('dragend', onDragEnd);
