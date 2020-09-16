@@ -22,8 +22,6 @@
             }
 
             $("#city").text("Current city: " + data.city.name);
-            console.log(fiveDayForecast);
-
             $("#forecast").html("");
 
             for (let day of fiveDayForecast) {
