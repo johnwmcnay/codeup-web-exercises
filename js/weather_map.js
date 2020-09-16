@@ -54,17 +54,23 @@
         let pressure = day.main.pressure;
         let card = document.createElement("div");
 
-        $(card).addClass("day card mr-1 ml-1")
+        $(card).addClass("day card m-0 p-0 col-6 col-sm-4 col-xl-2")
             .html($("#template").html());
 
-        $(card).find(".temperature").text(minTemp + " °F / " + maxTemp + " °F");
-        $(card).find(".date").text(function(str) {
+        $(card).find(".temperature").text(maxTemp + " °F");
+        $(card).find(".date").html(function(str) {
             let d = new Date();
             d.setFullYear(parseInt(str.substring(0,4)));
             d.setMonth(parseInt(str.substring(5,7)) - 1);
             d.setDate(parseInt(str.substring(8,10)));
+            let temp = d.toDateString();
+            // TODO: continue to add mobile responsiveness to the text, shortening when the screen is smaller
 
-            return d.toDateString();
+            temp = temp.substring(0, temp.length - 4) + "&nbsp;" + "<span class='d-none d-sm-none d-md-block'>" +
+                temp.substring(temp.length - 4) + "</span>";
+
+            return temp;
+
         }(date));
         $(card).find(".icon").html(
             "<img src='http://openweathermap.org/img/w/" + icon + ".png'>"

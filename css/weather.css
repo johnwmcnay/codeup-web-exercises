@@ -3,12 +3,18 @@ body, html {
     padding: 0;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-image: linear-gradient(dodgerblue, dodgerblue 10%, lightcyan);
+    min-height: 100vh;
+    padding: 0;
+
 }
 
 .day {
-    width: 18%;
     box-shadow: 0 0 16px 4px navy;
 }
 
@@ -18,7 +24,7 @@ body {
 }
 
 #brand {
-    font-size: min(10vw, 32px);
+    font-size: min(10vw, 28px);
     font-family: 'Caveat', cursive;
     padding: 0;
 }
@@ -88,4 +94,18 @@ footer {
 
 .card-header {
     box-shadow: 0 4px 4px gray;
+}
+
+#forecast {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+footer {
+    font-size: min(3.5vw, 16px);
+}
+
+.fa-cloud {
+    font-size: 28px;
+    text-shadow: 2px 2px 4px gray;
 }

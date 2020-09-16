@@ -16,57 +16,60 @@
 </head>
 <body>
 
-<div id="main-header" class="row container-fluid align-items-center">
-    <div id="brand" class="col-sm-5 col-md-3 d-none d-sm-block"><span class="ml-3">Weather App</span></div>
-    <div id="searchForm" class="col-7 col-md-6">
-        <form class="form-row form-inline justify-content-center">
+<div id="main-header" class="d-flex col-12 align-items-center">
+    <div id="brand" class="col-sm-5 col-md-3 d-none d-sm-block">
+        <span class="ml-3"><i class="fas fa-cloud"></i> Weather App</span>
+    </div>
+    <div id="searchForm" class="col-7 col-md-6 p-0">
+        <form class="form-row form-inline justify-content-sm-end justify-content-md-center m-0">
             <label for="cityInput"></label>
-            <input class="form-control col-9" type="text" placeholder="Enter location" id="cityInput"
+<!--            <i class="fas fa-cloud d-block d-sm-none ml-2 mr-2 col-auto"></i>-->
+            <input class="form-control col-9 ml-2" type="text" placeholder="Enter location" id="cityInput"
                    name="cityInput">
-            <a class="btn col-auto" role="button" id="citySubmit">
+            <a class="btn col-auto mr-2" role="button" id="citySubmit">
                 <i class="fas fa-search-location d-md-none"></i>
                 <span class="d-none d-sm-none d-md-block">Search</span></a>
         </form>
     </div>
-    <div id="city" class="col-md-3 col-5 p-0 row justify-content-end d-flex d-sm-none d-md-flex">Current city:</div>
+    <div class="col-md-3 col-5 p-0 justify-content-end d-flex d-sm-none d-md-flex">
+        <span id="city" class="mr-2">Current city:</span></div>
 
 </div>
 <div style="height: 100px; width: 1px" class="d-inline-block m-0 p-0"></div>
 
-<div id="mapBox" class="row m-0 p-0 container-fluid">
+<div class="row justify-content-center" id="forecast"></div>
+
+
+<div id="mapBox" class="row m-0 p-0 container d-none">
     <div id='map' class="rounded mb-3"></div>
 </div>
 
-<div class="row justify-content-center container-fluid m-0 p-0">
-    <div class="row container-fluid m-0 p-0 justify-content-center" id="forecast"></div>
-</div>
-
-<footer class="m-0 p-0 row container-fluid">
-    <span class="m-2">Powered by OpenWeather and MapBox API</span>
+<footer class="ml-3 mt-3">
+    Powered by OpenWeather and MapBox API
 </footer>
 <div class="day card d-none" id="template">
-    <div class="date card-header text-center">
+    <div class="date card-header d-flex justify-content-center">
         09-15-2020
     </div>
 
-    <div class="card-body">
-        <div class="temperature text-center">
+    <div class="card-body row justify-content-center">
+        <div class="temperature text-center col-12">
             75/75
         </div>
-        <div class="icon row justify-content-center"></div>
-        <div class="description row justify-content-center">
+        <div class="description row text-center d-none d-sm-none d-md-block col-12">
             Description:
         </div>
-        <hr>
-        <div class="humidity">
+        <div class="icon col-12 d-flex justify-content-center"></div>
+        <hr class="d-none d-sm-none d-md-block">
+        <div class="humidity d-none d-sm-none d-md-block col-12 col-lg-6 col-xl-12">
             Humidity:
         </div>
-        <hr>
-        <div class="wind">
+        <hr class="d-none d-sm-none d-md-block">
+        <div class="wind d-none d-sm-none d-md-block col-12 col-lg-6 col-xl-12">
             Wind:
         </div>
-        <hr>
-        <div class="pressure">
+        <hr class="d-none d-sm-none d-md-block">
+        <div class="pressure d-none d-sm-none d-md-block col-12">
             Pressure:
         </div>
     </div>
