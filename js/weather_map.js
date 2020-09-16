@@ -1,12 +1,19 @@
 (function () {
 
+    const initialCoordinates = [-96.8084, 27.7799];
+
     mapboxgl.accessToken = mapboxToken;
     let map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-        center: [-96.8084, 27.7799], // starting position [lng, lat]
+        center: initialCoordinates, // starting position [lng, lat]
         zoom: 3,  // starting zoom
     });
+
+    let marker = new mapboxgl.Marker({
+        draggable: true})
+        .setLngLat(initialCoordinates)
+        .addTo(map);
 
     function getWeatherData(lng, lat) {
 
@@ -31,7 +38,7 @@
             let days = $("#forecast>.day");
 
             let fadeAllIn = function(index) {
-                $(days[index]).fadeIn(400, function() {
+                $(days[index]).animate({opacity: "1"}, 400, "swing", function() {
                     if (index + 1 < days.length) {
                         fadeAllIn(index + 1);
                     }
@@ -90,7 +97,7 @@
             "<strong>Pressure: </strong>" + pressure
         )
 
-        $("#forecast").append($(card).hide());
+        $("#forecast").append($(card).css("opacity", "0"));
     }
 
     $("#citySubmit").click(function (e) {
@@ -122,15 +129,14 @@
             }).then(function (data) {
                 map.flyTo({center: data, zoom: 12});
 
-                let marker = new mapboxgl.Marker({
-                    draggable: true})
-                    .setLngLat(data)
-                    .addTo(map);
+                marker.setLngLat(data);
 
                 function onDragEnd() {
                     let lngLat = marker.getLngLat();
 
-                    $(".day").fadeOut();
+                    $(".day").each(function(index){
+                        $(this).fadeOut(400 * (index + 1));
+                    });
 
                     getWeatherData(lngLat.lng, lngLat.lat);
                     map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
