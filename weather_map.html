@@ -11,21 +11,25 @@
     <title>Weather</title>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet'/>
+    <script src="https://kit.fontawesome.com/6fa36e9c98.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/weather.css">
 </head>
 <body>
 
 <div id="main-header" class="row container-fluid align-items-center">
-    <div id="brand" class="col-3">Weather App</div>
-    <div id="searchForm" class="col-6">
-        <form class="form-inline form-row justify-content-center">
+    <div id="brand" class="col-sm-5 col-md-3 d-none d-sm-block"><span class="ml-3">Weather App</span></div>
+    <div id="searchForm" class="col-7 col-md-6">
+        <form class="form-row form-inline justify-content-center">
             <label for="cityInput"></label>
-            <input class="form-control col-5" type="text" placeholder="Enter location here" id="cityInput"
+            <input class="form-control col-9" type="text" placeholder="Enter location" id="cityInput"
                    name="cityInput">
-            <a class="btn col-auto" role="button" id="citySubmit">Search</a>
+            <a class="btn col-auto" role="button" id="citySubmit">
+                <i class="fas fa-search-location d-md-none"></i>
+                <span class="d-none d-sm-none d-md-block">Search</span></a>
         </form>
     </div>
-    <div id="city" class="col-3 p-0 row justify-content-end">Current city:</div>
+    <div id="city" class="col-md-3 col-5 p-0 row justify-content-end d-flex d-sm-none d-md-flex">Current city:</div>
+
 </div>
 <div style="height: 100px; width: 1px" class="d-inline-block m-0 p-0"></div>
 

@@ -18,8 +18,9 @@ body {
 }
 
 #brand {
-    font-size: 32px;
+    font-size: min(10vw, 32px);
     font-family: 'Caveat', cursive;
+    padding: 0;
 }
 
 #citySubmit{
@@ -76,6 +77,7 @@ footer {
 }
 
 #city {
+    font-size: min(3.5vw, 16px);
     font-family: 'Grandstander', cursive;
     text-shadow: 2px 2px 6px black;
 }
