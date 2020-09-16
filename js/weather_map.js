@@ -130,8 +130,11 @@
                 function onDragEnd() {
                     let lngLat = marker.getLngLat();
 
+                    $(".day").fadeOut();
+
                     getWeatherData(lngLat.lng, lngLat.lat);
                     map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
+                    document.getElementById("filler").scrollIntoView();
                 }
 
                 marker.on('dragend', onDragEnd);
