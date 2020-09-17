@@ -2,6 +2,7 @@
 
     const initialCoordinates = [-96.8084, 27.7799];
 
+    //creates the MapBox to attach to a container for display in the HTML
     mapboxgl.accessToken = mapboxToken;
     let map = new mapboxgl.Map({
         container: 'map',
@@ -10,33 +11,43 @@
         zoom: 3,  // starting zoom
     });
 
+    //creates a marker
     let marker = new mapboxgl.Marker({
         draggable: true})
         .setLngLat(initialCoordinates)
         .addTo(map);
 
+    //using coordinates, uses an ajax call to get weather info and update the screen
     function getWeatherData(lng, lat) {
 
+        //ajax call accessing openweather data
         $.get("http://api.openweathermap.org/data/2.5/forecast", {
             APPID: weatherToken,
             lon: lng,
             lat: lat,
             units: "imperial"
         }).done(function (data) {
+
             let fiveDayForecast = [];
+
+            //40 entries are returned using three-hour increments, loop increments by 8 to grab five days
             for (let i = 0; i < data.list.length; i += 8) {
                 fiveDayForecast.push(data.list[i]);
             }
 
             $("#city").text("Current city: " + data.city.name);
+
+            //clears the forecast div so it's ready to be re-populated
             $("#forecast").html("");
 
+            //dynamically create the forecast cards
             for (let day of fiveDayForecast) {
                 createDayCard(day);
             }
 
-            let days = $("#forecast>.day");
+            const days = $("#forecast>.day");
 
+            //recursive function to fade in the forecast cards one at a time
             let fadeAllIn = function(index) {
                 $(days[index]).animate({opacity: "1"}, 400, "swing", function() {
                     if (index + 1 < days.length) {
@@ -50,77 +61,67 @@
         });
     }
 
+    //creates and adds a card to the forecast div
     function createDayCard(day) {
-        let date = day.dt_txt;
-        let maxTemp = day.main.temp_max.toString();
-        let minTemp = day.main.temp_min.toString();
-        let icon = day.weather[0].icon;
-        let description = day.weather[0].description;
-        let humidity = day.main.humidity;
-        let wind = day.wind.speed;
-        let pressure = day.main.pressure;
-        let card = document.createElement("div");
 
-        $(card).addClass("day card m-0 p-0 col-6 col-sm-4 col-xl-2")
+        let $card = $(document.createElement("div"));
+        const cardContents = {
+            "temperature": day.main.temp_max.toString() + " °F",
+            "date": formatDate(day.dt_txt),
+            "icon": "<img src='http://openweathermap.org/img/w/" + day.weather[0].icon + ".png' alt='icon'>",
+            "description": day.weather[0].description,
+            "humidity": "<strong>Humidity: </strong>" + day.main.humidity + "%",
+            "wind": "<strong>Wind: </strong>" + day.wind.speed + " mph",
+            "pressure": "<strong>Pressure: </strong>" + day.main.pressure,
+        }
+
+        //grabs the inner html from the template
+        $card.addClass("day card m-0 p-0 col-6 col-sm-4 col-xl-2")
             .html($("#template").html());
 
-        $(card).find(".temperature").text(maxTemp + " °F");
-        $(card).find(".date").html(function(str) {
-            let d = new Date();
-            d.setFullYear(parseInt(str.substring(0,4)));
-            d.setMonth(parseInt(str.substring(5,7)) - 1);
-            d.setDate(parseInt(str.substring(8,10)));
-            let temp = d.toDateString();
-            // TODO: continue to add mobile responsiveness to the text, shortening when the screen is smaller
+        //updates the html of all necessary pieces of the card
+        for (let key of Object.keys(cardContents)) {
+            $card.find("." + key).html(cardContents[key]);
+        }
 
-            temp = temp.substring(0, temp.length - 4) + "&nbsp;" + "<span class='d-none d-sm-none d-md-block'>" +
-                temp.substring(temp.length - 4) + "</span>";
+        //appends completed card to the forecast div with zero opacity
+        $("#forecast").append($card.css("opacity", "0"));
+    }
 
-            return temp;
+    //helper function to take the API-formatted date and return an display-formatted date
+    function formatDate(str) {
 
-        }(date));
-        $(card).find(".icon").html(
-            "<img src='http://openweathermap.org/img/w/" + icon + ".png'>"
-        )
+        //makes use of the built-in Date object
+        const d = new Date(parseInt(str.substring(0,4)),
+            parseInt(str.substring(5,7)) - 1,
+            parseInt(str.substring(8,10)));
 
-        $(card).find(".description").html(description);
+        let temp = d.toDateString();
 
-        $(card).find(".humidity").html(
-            "<strong>Humidity: </strong>" + humidity + "%"
-        )
+        //adds spans with classes to make mobile responsive
+        temp = temp.substring(0, temp.length - 4) + "&nbsp;" + "<span class='d-none d-sm-none d-md-block'>" +
+            temp.substring(temp.length - 4) + "</span>";
 
-        $(card).find(".wind").html(
-            "<strong>Wind: </strong>" + wind + " mph"
-        )
-
-        $(card).find(".pressure").html(
-            "<strong>Pressure: </strong>" + pressure
-        )
-
-        $("#forecast").append($(card).css("opacity", "0"));
+        return temp;
     }
 
     $("#citySubmit").click(function (e) {
-        e.preventDefault();
-        let location = $("#cityInput").val().trim();
-        if (location !== "") {
-            searchFor(location);
-            $("#cityInput").val("");
-        }
+        e.preventDefault();e.preventDefault();
+        searchFor($("#cityInput").val().trim());
     });
 
     $("#cityInput").on("keypress", function(e) {
         if (e.keyCode === 13) {
             e.preventDefault();
-            let location = $("#cityInput").val().trim();
-            if (location !== "") {
-                searchFor(location);
-                $("#cityInput").val("");
-            }
+            searchFor($(this).val().trim());
         }
     });
 
     function searchFor(searchStr) {
+
+        if (searchStr === "") {
+            return false;
+        }
 
         geocode(searchStr, mapboxToken)
             .then(function (result) {
@@ -132,18 +133,18 @@
                 marker.setLngLat(data);
 
                 function onDragEnd() {
-                    let lngLat = marker.getLngLat();
+                    const lngLat = marker.getLngLat();
 
-                    $(".day").each(function(index){
-                        $(this).fadeOut(400 * (index + 1));
-                    });
+                    $(".day").addClass("invisible");
 
                     getWeatherData(lngLat.lng, lngLat.lat);
                     map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
                     document.getElementById("filler").scrollIntoView();
+                    $("#cityInput").val("");
                 }
 
                 marker.on('dragend', onDragEnd);
+                return true;
         });
     }
 
