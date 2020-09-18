@@ -1,3 +1,7 @@
+//TODO: have five divs created once and not re-created every time
+// make more details accessible on the smaller screen formats
+// polish things with more ES6
+
 (function () {
 
     const initialCoordinates = [-96.8084, 27.7799];
@@ -35,20 +39,17 @@
                 fiveDayForecast.push(data.list[i]);
             }
 
-            $("#city").text("Current city: " + data.city.name);
+            $("#city").text(`Current city: ${data.city.name}`);
 
-            //clears the forecast div so it's ready to be re-populated
-            $("#forecast").html("");
-
-            //dynamically create the forecast cards
-            for (let day of fiveDayForecast) {
-                createDayCard(day);
+            //dynamically updates the forecast cards
+            for (let day = 0; day < fiveDayForecast.length; day++) {
+                updateDayCard(fiveDayForecast[day], `#card${day}`);
             }
 
             const days = $("#forecast>.day");
 
             //recursive function to fade in the forecast cards one at a time
-            let fadeAllIn = function(index) {
+            let fadeAllIn = function(index= 0) {
                 $(days[index]).animate({opacity: "1"}, 400, "swing", function() {
                     if (index + 1 < days.length) {
                         fadeAllIn(index + 1);
@@ -56,36 +57,37 @@
                 });
             }
 
-            fadeAllIn(0);
+            fadeAllIn();
 
         });
     }
 
     //creates and adds a card to the forecast div
-    function createDayCard(day) {
+    function updateDayCard(day, id) {
 
-        let $card = $(document.createElement("div"));
+        const $card = $(id);
+
         const cardContents = {
-            "temperature": day.main.temp_max.toString() + " °F",
+            "temperature": `${day.main.temp_max.toString()} °F`,
             "date": formatDate(day.dt_txt),
-            "icon": "<img src='http://openweathermap.org/img/w/" + day.weather[0].icon + ".png' alt='icon'>",
+            "icon": `<img src="http://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="icon">`,
             "description": day.weather[0].description,
-            "humidity": "<strong>Humidity: </strong>" + day.main.humidity + "%",
-            "wind": "<strong>Wind: </strong>" + day.wind.speed + " mph",
-            "pressure": "<strong>Pressure: </strong>" + day.main.pressure,
+            "humidity": `<strong>Humidity: </strong>${day.main.humidity}%`,
+            "wind": `<strong>Wind: </strong>${day.wind.speed} mph`,
+            "pressure": `<strong>Pressure: </strong>${day.main.pressure}`,
         }
 
         //grabs the inner html from the template
         $card.addClass("day card m-0 p-0 col-6 col-sm-4 col-xl-2")
             .html($("#template").html());
 
+        $card.css("opacity", "0")
+
         //updates the html of all necessary pieces of the card
         for (let key of Object.keys(cardContents)) {
             $card.find("." + key).html(cardContents[key]);
         }
 
-        //appends completed card to the forecast div with zero opacity
-        $("#forecast").append($card.css("opacity", "0"));
     }
 
     //helper function to take the API-formatted date and return an display-formatted date
@@ -99,14 +101,14 @@
         let temp = d.toDateString();
 
         //adds spans with classes to make mobile responsive
-        temp = temp.substring(0, temp.length - 4) + "&nbsp;" + "<span class='d-none d-sm-none d-md-block'>" +
-            temp.substring(temp.length - 4) + "</span>";
+        temp = `<span>${temp.substring(0, temp.length - 4)}</span>
+            <span class="d-none d-sm-none d-md-block ml-1">${temp.substring(temp.length - 4)}</span>`;
 
         return temp;
     }
 
     $("#citySubmit").click(function (e) {
-        e.preventDefault();e.preventDefault();
+        e.preventDefault();
         searchFor($("#cityInput").val().trim());
     });
 
@@ -134,8 +136,6 @@
 
                 function onDragEnd() {
                     const lngLat = marker.getLngLat();
-
-                    $(".day").addClass("invisible");
 
                     getWeatherData(lngLat.lng, lngLat.lat);
                     map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
