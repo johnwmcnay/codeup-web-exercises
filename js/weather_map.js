@@ -17,7 +17,8 @@
 
     //creates a marker
     let marker = new mapboxgl.Marker({
-        draggable: true})
+        draggable: true
+    })
         .setLngLat(initialCoordinates)
         .addTo(map);
 
@@ -49,8 +50,8 @@
             const days = $("#forecast>.day");
 
             //recursive function to fade in the forecast cards one at a time
-            let fadeAllIn = function(index= 0) {
-                $(days[index]).animate({opacity: "1"}, 400, "swing", function() {
+            let fadeAllIn = function (index = 0) {
+                $(days[index]).animate({opacity: "1"}, 400, "swing", function () {
                     if (index + 1 < days.length) {
                         fadeAllIn(index + 1);
                     }
@@ -70,15 +71,19 @@
         const cardContents = {
             "temperature": `${day.main.temp_max.toString()} °F`,
             "date": formatDate(day.dt_txt),
-            "icon": `<img src="http://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="icon">`,
-            "description": day.weather[0].description,
+            "icon":
+                `<img class="d-block d-sm-none"
+                    id="alt-icon" src="http://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="icon">
+                <img class="d-none d-sm-block"
+                    src="http://openweathermap.org/img/w/${day.weather[0].icon}.png" alt="icon">`,
+            "description": `<em>${day.weather[0].description}</em>`,
             "humidity": `<strong>Humidity: </strong>${day.main.humidity}%`,
             "wind": `<strong>Wind: </strong>${day.wind.speed} mph`,
             "pressure": `<strong>Pressure: </strong>${day.main.pressure}`,
         }
 
         //grabs the inner html from the template
-        $card.addClass("day card m-0 p-0 col-6 col-sm-4 col-xl-2")
+        $card.addClass("day card m-0 p-0 col-12 col-sm-6 col-lg-4 col-xl-2")
             .html($("#template").html());
 
         $card.css("opacity", "0")
@@ -94,9 +99,9 @@
     function formatDate(str) {
 
         //makes use of the built-in Date object
-        const d = new Date(parseInt(str.substring(0,4)),
-            parseInt(str.substring(5,7)) - 1,
-            parseInt(str.substring(8,10)));
+        const d = new Date(parseInt(str.substring(0, 4)),
+            parseInt(str.substring(5, 7)) - 1,
+            parseInt(str.substring(8, 10)));
 
         let temp = d.toDateString();
 
@@ -112,7 +117,7 @@
         searchFor($("#cityInput").val().trim());
     });
 
-    $("#cityInput").on("keypress", function(e) {
+    $("#cityInput").on("keypress", function (e) {
         if (e.keyCode === 13) {
             e.preventDefault();
             searchFor($(this).val().trim());
@@ -130,21 +135,21 @@
                 getWeatherData(result[0], result[1]);
                 return result;
             }).then(function (data) {
-                map.flyTo({center: data, zoom: 12});
+            map.flyTo({center: data, zoom: 12});
 
-                marker.setLngLat(data);
+            marker.setLngLat(data);
 
-                function onDragEnd() {
-                    const lngLat = marker.getLngLat();
+            function onDragEnd() {
+                const lngLat = marker.getLngLat();
 
-                    getWeatherData(lngLat.lng, lngLat.lat);
-                    map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
-                    document.getElementById("filler").scrollIntoView();
-                    $("#cityInput").val("");
-                }
+                getWeatherData(lngLat.lng, lngLat.lat);
+                map.flyTo({center: [lngLat.lng, lngLat.lat], zoom: 12});
+                document.getElementById("filler").scrollIntoView();
+                $("#cityInput").val("");
+            }
 
-                marker.on('dragend', onDragEnd);
-                return true;
+            marker.on('dragend', onDragEnd);
+            return true;
         });
     }
 

@@ -26,13 +26,13 @@
 <div id="main-header" class="d-flex col-12 align-items-center">
 
     <!-- logo and app name-->
-    <div id="brand" class="col-sm-5 col-md-3 d-none d-sm-block">
+    <div id="brand" class="col-md-3 d-none d-sm-none d-md-block">
         <span class="ml-3"><i class="fas fa-cloud"></i> Weather App</span>
     </div>
 
     <!-- location search text field and button -->
     <div id="searchForm" class="col-7 col-md-6 p-0">
-        <form class="form-row form-inline justify-content-sm-end justify-content-md-center m-0">
+        <form class="form-row form-inline justify-content-md-center m-0">
             <label for="cityInput"></label>
             <input class="form-control col-9 ml-2" type="text" placeholder="Enter location" id="cityInput"
                    name="cityInput">
@@ -43,7 +43,7 @@
     </div>
 
     <!--  current city display -->
-    <div class="col-md-3 col-5 p-0 justify-content-end d-flex d-sm-none d-md-flex">
+    <div class="col-md-3 col-5 p-0 justify-content-end d-flex">
         <span id="city" class="mr-2">Current city:</span></div>
 
 </div>
@@ -81,32 +81,54 @@
     <!-- card body includes all of the other info -->
     <div class="card-body row justify-content-center">
 
-        <!-- temperature -->
-        <div class="temperature text-center col-12">
-            75/75
+
+        <div class="col-6 col-xl-12 p-0 d-flex flex-column text-center">
+            <!-- temperature -->
+            <div class="temperature text-center d-none d-sm-block">
+
+            </div>
+            <div id="alt-temp" class="temperature text-center d-block d-sm-none">
+                75
+            </div>
+
+            <!-- text description of weather condition -->
+            <div class="description text-center d-none d-sm-block">
+                Description:
+            </div>
+            <div id="alt-description" class="description text-center d-block d-sm-none">
+                Description:
+            </div>
+
+            <!-- icon for weather condition -->
+            <div class="icon justify-content-center d-flex"></div>
+<!--            <div id="alt-icon" class="icon d-flex justify-content-center d-sm-none img-fluid"></div>-->
         </div>
 
-        <!-- text description of weather condition -->
-        <div class="description row text-center d-none d-sm-none d-md-block col-12">
-            Description:
-        </div>
 
-        <!-- icon for weather condition -->
-        <div class="icon col-12 d-flex justify-content-center"></div>
+        <div class="col-6 col-xl-12 pl-xl-3 d-flex flex-column justify-content-around">
+            <!-- humidity -->
+            <div class="humidity d-none d-sm-block">
+                Humidity:
+            </div>
+            <div class="humidity xs-data d-block d-sm-none">
+                Humidity:
+            </div>
 
-        <!-- humidity -->
-        <div class="humidity d-none d-sm-none d-md-block col-12 col-lg-6 col-xl-12">
-            Humidity:
-        </div>
+            <!-- wind -->
+            <div class="wind d-none d-sm-block">
+                Wind:
+            </div>
+            <div class="wind xs-data d-block d-sm-none">
+                Wind:
+            </div>
 
-        <!-- wind -->
-        <div class="wind d-none d-sm-none d-md-block col-12 col-lg-6 col-xl-12">
-            Wind:
-        </div>
-
-        <!-- pressure -->
-        <div class="pressure d-none d-sm-none d-md-block col-12">
-            Pressure:
+            <!-- pressure -->
+            <div class="pressure d-none d-sm-block">
+                Pressure:
+            </div>
+            <div class="pressure xs-data d-block d-sm-none">
+                Pressure:
+            </div>
         </div>
     </div>
 </div>

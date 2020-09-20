@@ -36,7 +36,7 @@ footer {
 }
 
 .card-body {
-    padding: 10px
+    padding: 10px;
 }
 
 .fa-cloud {
@@ -109,5 +109,31 @@ footer {
     margin-right: 5%;
 }
 
+.temperature {
+   font-size: min(8vw, 24px);
 
+}
 
+.temperature, .description, .icon {
+    padding: 0;
+}
+
+.humidity, .pressure, .wind {
+    font-size: min(4vw, 12px);
+}
+
+#alt-temp {
+    font-size: 7vw;
+}
+
+#alt-description {
+    font-size: 3.5vw;
+}
+
+#alt-icon {
+    height: 13vw;
+}
+
+.xs-data {
+    font-size: 3.5vw;
+}
