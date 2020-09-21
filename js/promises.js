@@ -6,7 +6,18 @@ function gitData(url) {
 
 gitData("https://api.github.com/users/johnwmcnay/events")
     .then(data => {
-        console.log(data[0].created_at);
+        return data;
+    })
+    .then(data => {
+        let i = 0;
+
+        while (i < data.length) {
+            if (data[i].type === "PushEvent") {
+                break;
+            }
+            i++;
+        }
+        console.log(data[i].created_at);
     });
 
 function wait(delay) {
