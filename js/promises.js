@@ -30,3 +30,29 @@ function wait(delay) {
 
 wait(3000).then(msg => console.log(msg));
 wait(1500).then(msg => console.log(msg));
+
+fetch("https://platinum-satisfying-caption.glitch.me/movies")
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+fetch(`https://omdbapi.com/?apikey=${omdbToken}&s=summer`)
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+const reviewObj = {
+    restaurant_id: 1,
+    name: 'John',
+    rating: 2,
+    comments: "Slow service! Mediocre food!"
+};
+const url = 'https://codeup-restful-example.glitch.me/reviews';
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(reviewObj),
+};
+fetch(url, options)
+    .then( response => console.log(response) ) /* review was created successfully */
+    .catch( error => console.error(error) ); /* handle errors */
